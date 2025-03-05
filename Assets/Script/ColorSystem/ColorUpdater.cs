@@ -96,7 +96,6 @@ public class ColorUpdater : MonoBehaviour
     {
         return colorValue;
     }
-
     private string FindClosestColorName()
     {
         string bestMatch = "Closed"; // Default to "Closed"
@@ -123,7 +122,48 @@ public class ColorUpdater : MonoBehaviour
             bestMatch = "Closed";
         }
 
-        // Change the GameObject name to the best match
+        // Only count valid color names (skip "Closed" and unrelated names)
+        if (bestMatch != "Closed")
+        {
+            int nameCount = 0;
+            Transform parent = transform.parent; // Get parent or group
+            if (parent != null)
+            {
+                foreach (Transform child in parent)
+                {
+                    if (child.gameObject == this.gameObject) continue; // Exclude itself
+
+                    string childName = child.gameObject.name;
+
+                    // Check if child name exists in Level2ColorData
+                    bool isValidName = Level2ColorData.elements.Exists(e => e.ColorName == childName);
+
+                    if (isValidName && childName == bestMatch)
+                    {
+                        nameCount++;
+                    }
+                }
+            }
+
+            // If more than 2 exist (meaning the third one is trying to change to this name)
+            if (nameCount >= 2)
+            {
+                bestMatch += " color exceeding limit";
+
+                // Update the UI text (if available)
+                Transform colorNameTransform = transform.Find("ColorName");
+                if (colorNameTransform != null)
+                {
+                    TextMeshProUGUI textComponent = colorNameTransform.GetComponent<TextMeshProUGUI>();
+                    if (textComponent != null)
+                    {
+                        textComponent.text = bestMatch;
+                    }
+                }
+            }
+        }
+
+        // Change the GameObject name AFTER counting, to avoid double-counting issue
         gameObject.name = bestMatch;
 
         return bestMatch;
