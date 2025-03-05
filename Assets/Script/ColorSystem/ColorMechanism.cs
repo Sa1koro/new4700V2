@@ -1,46 +1,83 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections.Generic;
 
 public class ColorMechanism : MonoBehaviour
 {
-    public ColorData colorData; // Assign manually
-    public GameObject colorPrefab; // Prefab to spawn
-    public Vector3 offset = new Vector3(10f, 0f, 0f); // Offset for subsequent prefabs
-    public Transform Canvas; // Assign your UI Canvas in Inspector
+    [SerializeField] private ColorData colorData; // Assign manually
+    [SerializeField] private GameObject colorPrefab; // Prefab to spawn
+    [SerializeField] private Transform Canvas; // Assign UI Canvas in Inspector
 
-    private void Start()
+    private Dictionary<int, GameObject> spawnedPrefabs = new Dictionary<int, GameObject>();
+    private int lastElementCount = 0; // Track the last known count of elements
+
+    private void Update()
     {
         if (colorData == null || colorPrefab == null || Canvas == null) return;
 
-        GameObject previousPrefab = null; // Store the last spawned prefab
-
-        for (int i = 0; i < colorData.elements.Count; i++)
+        // If number of elements changes, refresh everything
+        if (colorData.elements.Count != lastElementCount)
         {
-            GameObject spawnedObject = Instantiate(colorPrefab, Canvas);
-            
-            // If it's not the first prefab, adjust its position
-            if (previousPrefab != null)
+            RefreshElements();
+            lastElementCount = colorData.elements.Count;
+        }
+        else
+        {
+            // Just update existing prefabs
+            for (int i = 0; i < colorData.elements.Count; i++)
             {
-                spawnedObject.transform.position = previousPrefab.transform.position + offset;
+                if (spawnedPrefabs.TryGetValue(i, out GameObject prefab))
+                {
+                    UpdatePrefab(prefab, colorData.elements[i]);
+                }
             }
-
-            // Store this prefab as the last spawned one
-            previousPrefab = spawnedObject;
-
-            // Setup the prefab with data
-            SetupPrefab(spawnedObject, colorData.elements[i]);
         }
     }
 
-    private void SetupPrefab(GameObject spawnedObject, ColorData.ourColors element)
+    private void RefreshElements()
     {
-        // Find child "ColorName" and update TextMeshPro
+        // Remove all current prefabs before reloading
+        foreach (var prefab in spawnedPrefabs.Values)
+        {
+            Destroy(prefab);
+        }
+        spawnedPrefabs.Clear();
+
+        for (int i = 0; i < colorData.elements.Count; i++)
+        {
+            var element = colorData.elements[i];
+
+            // Spawn and parent the object to Canvas
+            GameObject spawnedObject = Instantiate(colorPrefab, Canvas);
+            spawnedPrefabs[i] = spawnedObject;
+
+            // Get the RectTransform
+            RectTransform rectTransform = spawnedObject.GetComponent<RectTransform>();
+
+            if (rectTransform != null)
+            {
+                // Move every element (except the first one) to the right of the previous one
+                if (i > 0)
+                {
+                    RectTransform prevRect = spawnedPrefabs[i - 1].GetComponent<RectTransform>();
+                    float width = prevRect.rect.width * prevRect.localScale.x;
+                    rectTransform.anchoredPosition = prevRect.anchoredPosition + new Vector2(width + 10, 0); //here's the gap
+                }
+            }
+
+            UpdatePrefab(spawnedObject, element);
+        }
+    }
+
+    private void UpdatePrefab(GameObject spawnedObject, ColorData.ourColors element)
+    {
+        // Find child "ColorName" and update TextMeshPro text
         Transform colorNameTransform = spawnedObject.transform.Find("ColorName");
         if (colorNameTransform != null)
         {
             TextMeshProUGUI textComponent = colorNameTransform.GetComponent<TextMeshProUGUI>();
-            if (textComponent != null)
+            if (textComponent != null && textComponent.text != element.ColorName)
             {
                 textComponent.text = element.ColorName;
             }
@@ -54,7 +91,9 @@ public class ColorMechanism : MonoBehaviour
             if (spriteRenderer != null)
             {
                 spriteRenderer.color = new Color(element.color.x, element.color.y, element.color.z, element.color.w);
-                spriteRenderer.fillAmount = element.SourceAmount; // Directly setting, since it's already 0-1
+                spriteRenderer.fillAmount = element.SourceAmount;
+            } else {
+                Debug.Log("null");
             }
         }
     }
