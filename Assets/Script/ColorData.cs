@@ -9,7 +9,10 @@ public class ColorData : ScriptableObject
     {
         public string ColorName;
         public Vector4 color; // (R, G, B, A)
+        public float SourceAmount; //how much left
     }
 
     public List<ourColors> elements = new List<ourColors>();
+    public ourColors DetectedColor = new ourColors();
+
 }
