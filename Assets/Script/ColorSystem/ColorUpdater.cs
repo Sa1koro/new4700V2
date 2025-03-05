@@ -117,7 +117,15 @@ public class ColorUpdater : MonoBehaviour
             }
         }
 
-        // If the closest color is still too different, return "Closed"
-        return closestDistance > colorThreshold ? "Closed" : bestMatch;
+        // If the closest color is still too different, set to "Closed"
+        if (closestDistance > colorThreshold)
+        {
+            bestMatch = "Closed";
+        }
+
+        // Change the GameObject name to the best match
+        gameObject.name = bestMatch;
+
+        return bestMatch;
     }
 }

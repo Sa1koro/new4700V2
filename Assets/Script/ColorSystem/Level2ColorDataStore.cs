@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "Level2cOLORData", menuName = "Custom/Level2cOLORData")]
+[CreateAssetMenu(fileName = "Level2ColorData", menuName = "Custom/Level2ColorData")]
 public class Level2ColorDataStore : ScriptableObject
 {
     [System.Serializable]
@@ -9,8 +9,8 @@ public class Level2ColorDataStore : ScriptableObject
     {
         public string ColorName;
         public Vector4 color; // (R, G, B, A)
-        public Transform position1;
-        public Transform position2;
+        public Vector3 position1;
+        public Vector3 position2;
         public int indicate;
     }
 
