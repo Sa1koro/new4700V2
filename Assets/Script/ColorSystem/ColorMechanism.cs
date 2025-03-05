@@ -100,11 +100,11 @@ public class ColorMechanism : MonoBehaviour
             }
         }
 
-        // Ensure "selected" child starts disabled
+        // Enable or disable "selected" child based on the element's selected state
         Transform selectedTransform = spawnedObject.transform.Find("selected");
         if (selectedTransform != null)
         {
-            selectedTransform.gameObject.SetActive(false);
+            selectedTransform.gameObject.SetActive(element.selected);
         }
     }
 
@@ -126,20 +126,47 @@ public class ColorMechanism : MonoBehaviour
     {
         if (index < 0 || index >= colorData.elements.Count) return;
 
-        // Store selected index
-        selectedIndex = index;
-
-        // Enable "selected" for the chosen prefab and disable others
+        // Update selected state in the elements list
         for (int i = 0; i < colorData.elements.Count; i++)
         {
-            if (spawnedPrefabs.TryGetValue(i, out GameObject prefab))
-            {
-                Transform selectedTransform = prefab.transform.Find("selected");
-                if (selectedTransform != null)
-                {
-                    selectedTransform.gameObject.SetActive(i == selectedIndex);
-                }
-            }
+            colorData.elements[i].selected = (i == index); // Only one selected at a time
+        }
+
+        selectedIndex = index; // Store the selected index
+    }
+
+    public void ChangingStatuesColor(GameObject targetObject)
+    {
+        // Ensure there's a valid selection
+        if (selectedIndex < 0 || selectedIndex >= colorData.elements.Count)
+        {
+            Debug.Log("No color selected.");
+            return;
+        }
+
+        // Get the selected color element
+        ColorData.ourColors selectedColor = colorData.elements[selectedIndex];
+
+        // Check if SourceAmount is enough to reduce
+        if (selectedColor.SourceAmount < 0.5f)
+        {
+            Debug.Log("Not enough color source to apply.");
+            return;
+        }
+
+        // Try to get the ColorUpdater script
+        ColorUpdater colorUpdater = targetObject.GetComponentInParent<ColorUpdater>();
+        if (colorUpdater != null)
+        {
+            // Apply the color to the target object's SetColor method
+            colorUpdater.SetColor(selectedColor.color);
+
+            // Reduce the source amount
+            selectedColor.SourceAmount -= 0.5f;
+        }
+        else
+        {
+            Debug.Log("Target object does not have a ColorUpdater script.");
         }
     }
 }

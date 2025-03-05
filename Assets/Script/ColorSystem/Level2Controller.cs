@@ -3,6 +3,7 @@ using UnityEngine;
 public class Level2Controller : MonoBehaviour
 {
     private GameObject detectedStatue; // Stores the detected statue object
+    [SerializeField] private ColorMechanism colorMechanism;
 
     void Update()
     {
@@ -19,6 +20,10 @@ public class Level2Controller : MonoBehaviour
             } else {
                 Debug.Log("didn't find colorscript");
             }
+        }
+        if (Input.GetKeyDown(KeyCode.E) && detectedStatue != null)
+        {
+            colorMechanism.ChangingStatuesColor(detectedStatue);
         }
     }
 
