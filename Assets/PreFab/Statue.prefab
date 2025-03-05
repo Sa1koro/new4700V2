@@ -156,6 +156,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   colorValue: {x: 0, y: 0, z: 0, w: 0}
   defaultColor: {x: 0, y: 0, z: 0, w: 0}
+  Level2ColorData: {fileID: 11400000, guid: 7a83cf6cd65591141aed31175796a5d8, type: 2}
+  upperPartMaterial: {fileID: 0}
+  colorNameText: {fileID: 0}
+  colorThreshold: 0.3
 --- !u!1 &2319977726188782939
 GameObject:
   m_ObjectHideFlags: 0
