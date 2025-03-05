@@ -10,9 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c52001bb59f68794ab0e91cdae934860, type: 3}
-  m_Name: ColorData
+  m_Name: ColorLevel2
   m_EditorClassIdentifier: 
-  elements: []
+  elements:
+  - ColorName: Red
+    color: {x: 1, y: 0, z: 0, w: 1}
+    SourceAmount: 1
+  - ColorName: Grey
+    color: {x: 0.5, y: 0.5, z: 0.5, w: 1}
+    SourceAmount: 1
+  - ColorName: Yellow
+    color: {x: 1, y: 1, z: 0, w: 1}
+    SourceAmount: 1
   DetectedColor:
     ColorName: 
     color: {x: 0, y: 0, z: 0, w: 0}
