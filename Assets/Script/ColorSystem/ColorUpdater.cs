@@ -168,4 +168,40 @@ public class ColorUpdater : MonoBehaviour
 
         return bestMatch;
     }
+
+    public void TryTeleport()
+    {
+        // Check if the object's name is a valid color in Level2ColorData
+        bool isValidName = Level2ColorData.elements.Exists(e => e.ColorName == gameObject.name);
+        if (!isValidName) return; // Exit if name is invalid
+
+        Transform parent = transform.parent; // Get parent or group
+        if (parent == null) return;
+
+        // Find another object with the same name in the group (excluding itself)
+        Transform targetTeleport = null;
+        foreach (Transform child in parent)
+        {
+            if (child.gameObject == this.gameObject) continue; // Skip self
+            if (child.gameObject.name == gameObject.name) // Match found
+            {
+                Transform teleportTransform = child.Find("Teleport");
+                if (teleportTransform != null)
+                {
+                    targetTeleport = teleportTransform;
+                    break; // Stop after finding the first valid one
+                }
+            }
+        }
+
+        // If a valid teleport target was found, move the player
+        if (targetTeleport != null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                player.transform.position = targetTeleport.position; // Move player
+            }
+        }
+    }
 }

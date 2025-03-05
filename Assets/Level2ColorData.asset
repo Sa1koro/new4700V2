@@ -17,11 +17,14 @@ MonoBehaviour:
     color: {x: 1, y: 0, z: 0, w: 1}
     position1: {x: 0, y: 0, z: 0}
     position2: {x: 0, y: 0, z: 0}
+    indicate: 1
+  - ColorName: Grey
+    color: {x: 0.5, y: 0.5, z: 0.5, w: 1}
+    position1: {x: -156.51, y: -4.780956, z: 100.5838}
+    position2: {x: -156.51, y: -4.780956, z: 100.5838}
+    indicate: 3
   - ColorName: Yellow
     color: {x: 1, y: 1, z: 0, w: 1}
     position1: {x: 0, y: 0, z: 0}
     position2: {x: 0, y: 0, z: 0}
-  - ColorName: Yellow
-    color: {x: 1, y: 1, z: 0, w: 1}
-    position1: {x: 0, y: 0, z: 0}
-    position2: {x: 0, y: 0, z: 0}
+    indicate: 1
