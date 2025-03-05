@@ -12,6 +12,8 @@ public class ColorMechanism : MonoBehaviour
     private Dictionary<int, GameObject> spawnedPrefabs = new Dictionary<int, GameObject>();
     private int lastElementCount = 0; // Track the last known count of elements
 
+    public int selectedIndex = -1; // Store selected element index (-1 means none selected)
+
     private void Update()
     {
         if (colorData == null || colorPrefab == null || Canvas == null) return;
@@ -33,6 +35,9 @@ public class ColorMechanism : MonoBehaviour
                 }
             }
         }
+
+        // Handle input for selecting colors
+        HandleSelectionInput();
     }
 
     private void RefreshElements()
@@ -62,7 +67,7 @@ public class ColorMechanism : MonoBehaviour
                 {
                     RectTransform prevRect = spawnedPrefabs[i - 1].GetComponent<RectTransform>();
                     float width = prevRect.rect.width * prevRect.localScale.x;
-                    rectTransform.anchoredPosition = prevRect.anchoredPosition + new Vector2(width + 10, 0); //here's the gap
+                    rectTransform.anchoredPosition = prevRect.anchoredPosition + new Vector2(width + 10, 0); // Spacing
                 }
             }
 
@@ -92,8 +97,48 @@ public class ColorMechanism : MonoBehaviour
             {
                 spriteRenderer.color = new Color(element.color.x, element.color.y, element.color.z, element.color.w);
                 spriteRenderer.fillAmount = element.SourceAmount;
-            } else {
-                Debug.Log("null");
+            }
+        }
+
+        // Ensure "selected" child starts disabled
+        Transform selectedTransform = spawnedObject.transform.Find("selected");
+        if (selectedTransform != null)
+        {
+            selectedTransform.gameObject.SetActive(false);
+        }
+    }
+
+    private void HandleSelectionInput()
+    {
+        if (colorData.elements.Count < 4) return; // Ensure at least 4 elements exist
+
+        for (int i = 1; i <= 4; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + (i - 1))) // Detect key presses (1,2,3,4)
+            {
+                SelectColor(i - 1);
+                break;
+            }
+        }
+    }
+
+    private void SelectColor(int index)
+    {
+        if (index < 0 || index >= colorData.elements.Count) return;
+
+        // Store selected index
+        selectedIndex = index;
+
+        // Enable "selected" for the chosen prefab and disable others
+        for (int i = 0; i < colorData.elements.Count; i++)
+        {
+            if (spawnedPrefabs.TryGetValue(i, out GameObject prefab))
+            {
+                Transform selectedTransform = prefab.transform.Find("selected");
+                if (selectedTransform != null)
+                {
+                    selectedTransform.gameObject.SetActive(i == selectedIndex);
+                }
             }
         }
     }
