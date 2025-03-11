@@ -18,7 +18,7 @@ public class QRCodeColorManager : MonoBehaviour
     [SerializeField] private SpriteRenderer colorSpriteRenderer; // Assign in Unity
     
     [SerializeField] private Vector4 fetchedColor; // Display in Inspector
-    private float fetchInterval = 30f; // Fetch color data every 30s
+    [SerializeField] private float fetchInterval = 5f; // Fetch color data every 30s
 
     void Awake()
     {
@@ -61,16 +61,23 @@ public class QRCodeColorManager : MonoBehaviour
 
     IEnumerator FetchColorData()
     {
-        string apiUrl = $"https://4700.vercel.app/api/getColor?key={uuidMD5}";
+        // Ensure the UUID is generated before making a request
+        while (string.IsNullOrEmpty(uuidMD5))
+        {
+            Debug.LogWarning("UUID is not yet generated, waiting...");
+            yield return new WaitForSeconds(1); // Wait 1 second before retrying
+        }
 
-        Debug.Log($"Fetching color data from: {apiUrl}"); // Debug API URL
+        string apiUrl = $"https://4700.vercel.app/api/getColor?key={uuidMD5}";
+        Debug.Log($"Fetching color data from: {apiUrl}");
 
         UnityWebRequest request = UnityWebRequest.Get(apiUrl);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            Debug.Log($"Raw Response: {request.downloadHandler.text}"); // Debug response
+            Debug.Log($"Raw Response: {request.downloadHandler.text}");
+
             ColorData colorData = JsonUtility.FromJson<ColorData>(request.downloadHandler.text);
             fetchedColor = new Vector4(colorData.red, colorData.green, colorData.blue, colorData.lightness);
 
@@ -81,7 +88,7 @@ public class QRCodeColorManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError($"Error fetching color data: {request.error}");
+            Debug.LogError($"Error fetching color data: {request.error} (URL: {apiUrl})");
         }
     }
 
