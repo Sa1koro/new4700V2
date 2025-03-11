@@ -169,4 +169,31 @@ public class ColorMechanism : MonoBehaviour
             Debug.Log("Target object does not have a ColorUpdater script.");
         }
     }
+
+    public void ApplyFullColor(Vector4 newColor)
+    {
+        // Ensure a valid selection exists
+        if (selectedIndex < 0 || selectedIndex >= colorData.elements.Count)
+        {
+            Debug.LogError("No color selected or invalid index.");
+            return;
+        }
+
+        // Get the selected color element
+        ColorData.ourColors selectedColor = colorData.elements[selectedIndex];
+
+        // Apply the new color (use only RGB, keep original Alpha)
+        selectedColor.color = new Vector4(newColor.x, newColor.y, newColor.z, selectedColor.color.w);
+
+        // Set SourceAmount to full
+        selectedColor.SourceAmount = 1f;
+
+        // Update the UI display
+        if (spawnedPrefabs.TryGetValue(selectedIndex, out GameObject prefab))
+        {
+            UpdatePrefab(prefab, selectedColor);
+        }
+
+        Debug.Log($"Updated selected color to: {selectedColor.color} with full source.");
+    }
 }

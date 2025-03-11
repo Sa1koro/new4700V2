@@ -7,7 +7,7 @@ using ZXing;
 using ZXing.QrCode;
 using System.Collections;
 
-public class QRCodeColorManager : MonoBehaviour
+public class QRCodeColorManagerL2 : MonoBehaviour
 {
     [Header("QR Code & Color Settings")]
     public string baseUrl = "https://4700.vercel.app/";
