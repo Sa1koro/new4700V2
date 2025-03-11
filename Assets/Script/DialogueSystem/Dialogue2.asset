@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122c5878a11ce1d4a86923cce4e6dbbf, type: 3}
+  m_Name: Dialogue2
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - This dungeon may be dark and lifeless, but you hold a unique power.
+  - You can reach beyond this world and bring colors from a higher dimension.
+  - "To gather colors, use the matrix here\u2014it's a link between worlds."
+  - Scan the QR code with your device to sync with your surroundings.
+  - On the website, press "Capture" to analyze the colors in your world.
+  - Then, click "Pick" to transfer those colors into this realm.
+  - "Watch the glowing triangles on the floor\u2014when they sync, the color is ready."
+  - Step close and press "E" to absorb the color into your storage.
+  - Press 1, 2, 3, or 4 to select different color slots and prepare for what lies
+    ahead.

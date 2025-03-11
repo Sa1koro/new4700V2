@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 122c5878a11ce1d4a86923cce4e6dbbf, type: 3}
+  m_Name: Dialogue5
+  m_EditorClassIdentifier: 
+  dialogueEntries:
+  - "These statues\u2026 they are not just decorations."
+  - "Forged by the ancient dark power of the dungeon\u2019s owner, they stand as
+    remnants of forgotten magic."
+  - "But there is one secret they hold\u2014the power to bend space itself."
+  - Colors are the key. The right combination awakens their energy.
+  - "IMPORTANT RULES: If exactly two statues hold one of these colors\u2014Red, Grey,
+    Yellow, or Green\u2014you will be able to travel between them."
+  - Red, Grey, Yellow, or Green. Remember these color that you can use. Maybe you
+    need to gather them for later use.
+  - When the rules meet. Stand on the white circle in front statue and press T to
+    Teloport.
+  - "Use this knowledge wisely\u2026 it may be the only way forward."

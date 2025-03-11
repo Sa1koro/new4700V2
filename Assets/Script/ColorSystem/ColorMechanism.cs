@@ -14,6 +14,21 @@ public class ColorMechanism : MonoBehaviour
 
     public int selectedIndex = -1; // Store selected element index (-1 means none selected)
 
+    private void Start()
+    {
+        if (colorData == null) return;
+
+        // Reset all colors and SourceAmount at the start
+        foreach (var element in colorData.elements)
+        {
+            element.color = new Vector4(0f, 0f, 0f, 1f); // Reset to black with full alpha
+            element.SourceAmount = 0f; // Set to empty
+        }
+
+        // Ensure UI updates correctly
+        RefreshElements();
+    }
+
     private void Update()
     {
         if (colorData == null || colorPrefab == null || Canvas == null) return;
