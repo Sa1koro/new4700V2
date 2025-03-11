@@ -6,6 +6,7 @@ TagManager:
   tags:
   - drainable
   - Statues
+  - QRcarrier
   layers:
   - Default
   - TransparentFX
