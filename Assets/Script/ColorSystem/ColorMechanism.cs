@@ -78,15 +78,15 @@ public class ColorMechanism : MonoBehaviour
     private void UpdatePrefab(GameObject spawnedObject, ColorData.ourColors element)
     {
         // Find child "ColorName" and update TextMeshPro text
-        Transform colorNameTransform = spawnedObject.transform.Find("ColorName");
-        if (colorNameTransform != null)
-        {
-            TextMeshProUGUI textComponent = colorNameTransform.GetComponent<TextMeshProUGUI>();
-            if (textComponent != null && textComponent.text != element.ColorName)
-            {
-                textComponent.text = element.ColorName;
-            }
-        }
+        // Transform colorNameTransform = spawnedObject.transform.Find("ColorName");
+        // if (colorNameTransform != null)
+        // {
+        //     TextMeshProUGUI textComponent = colorNameTransform.GetComponent<TextMeshProUGUI>();
+        //     if (textComponent != null && textComponent.text != element.ColorName)
+        //     {
+        //         textComponent.text = element.ColorName;
+        //     }
+        // }
 
         // Find child "InColor" and update color & fill amount
         Transform inColorTransform = spawnedObject.transform.Find("InColor");
