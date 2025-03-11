@@ -17,7 +17,7 @@ public class QRCodeColorManagerL2 : MonoBehaviour
     [SerializeField] private SpriteRenderer qrSpriteRenderer; // Assign in Unity
     [SerializeField] private SpriteRenderer colorSpriteRenderer; // Assign in Unity
     
-    [SerializeField] private Vector4 fetchedColor; // Display in Inspector
+    public Vector4 fetchedColor; // Display in Inspector
     [SerializeField] private float fetchInterval = 5f; // Fetch color data every 30s
 
     void Awake()

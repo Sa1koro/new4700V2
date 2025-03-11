@@ -97,6 +97,8 @@ GameObject:
   - component: {fileID: 2013692948890405472}
   - component: {fileID: 8853835494376711958}
   - component: {fileID: 9038804020806425818}
+  - component: {fileID: 6994899243957168844}
+  - component: {fileID: 8844628721100197454}
   m_Layer: 0
   m_Name: QRcodeCarrier
   m_TagString: QRcarrier
@@ -189,6 +191,43 @@ MonoBehaviour:
   colorSpriteRenderer: {fileID: 4656993312006409284}
   fetchedColor: {x: 0, y: 0, z: 0, w: 0}
   fetchInterval: 5
+--- !u!114 &6994899243957168844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663948675215695895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc7c8d680c756894d9c805224f59bddd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorMechanism: {fileID: 0}
+  playerInRange: 0
+  qrCodeColorManager: {fileID: 0}
+  triggerZone: {fileID: 0}
+--- !u!65 &8844628721100197454
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 663948675215695895}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.9907966, y: 3.9094439, z: 2.8720183}
+  m_Center: {x: -1.9953983, y: 1.777421, z: 0.006973028}
 --- !u!1 &6128570517273433798
 GameObject:
   m_ObjectHideFlags: 0
@@ -200,7 +239,6 @@ GameObject:
   - component: {fileID: 7882255412697018054}
   - component: {fileID: 1438771593683393146}
   - component: {fileID: 5535697531274263121}
-  - component: {fileID: 7537608701356955726}
   m_Layer: 0
   m_Name: DetectedZoneQR
   m_TagString: Untagged
@@ -273,27 +311,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7537608701356955726
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6128570517273433798}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 6.393293e-19, z: -1.8992173e-17}
 --- !u!1 &7627832444525589180
 GameObject:
   m_ObjectHideFlags: 0
