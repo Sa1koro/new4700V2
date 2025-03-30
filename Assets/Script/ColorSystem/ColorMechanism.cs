@@ -33,22 +33,20 @@ public class ColorMechanism : MonoBehaviour
     {
         if (colorData == null || colorPrefab == null || Canvas == null) return;
 
-        // If number of elements changes, refresh everything
+        // Ensure color updates every frame
+        for (int i = 0; i < colorData.elements.Count; i++)
+        {
+            if (spawnedPrefabs.TryGetValue(i, out GameObject prefab))
+            {
+                UpdatePrefab(prefab, colorData.elements[i]);
+            }
+        }
+
+        // Check if the number of elements has changed, refresh UI if necessary
         if (colorData.elements.Count != lastElementCount)
         {
             RefreshElements();
             lastElementCount = colorData.elements.Count;
-        }
-        else
-        {
-            // Just update existing prefabs
-            for (int i = 0; i < colorData.elements.Count; i++)
-            {
-                if (spawnedPrefabs.TryGetValue(i, out GameObject prefab))
-                {
-                    UpdatePrefab(prefab, colorData.elements[i]);
-                }
-            }
         }
 
         // Handle input for selecting colors
