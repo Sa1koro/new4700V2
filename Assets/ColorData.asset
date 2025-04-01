@@ -16,11 +16,11 @@ MonoBehaviour:
   - ColorName: Red
     color: {x: 0, y: 0, z: 0, w: 1}
     SourceAmount: 0
-    selected: 1
+    selected: 0
   - ColorName: Green
     color: {x: 0, y: 0, z: 0, w: 1}
     SourceAmount: 0
-    selected: 0
+    selected: 1
   - ColorName: Grey
     color: {x: 0, y: 0, z: 0, w: 1}
     SourceAmount: 0
