@@ -190,7 +190,7 @@ MonoBehaviour:
   qrSpriteRenderer: {fileID: 8803544276095859687}
   colorSpriteRenderer: {fileID: 4656993312006409284}
   fetchedColor: {x: 0, y: 0, z: 0, w: 0}
-  fetchInterval: 5
+  fetchInterval: 30
 --- !u!114 &6994899243957168844
 MonoBehaviour:
   m_ObjectHideFlags: 0

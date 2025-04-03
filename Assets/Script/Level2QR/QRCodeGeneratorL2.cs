@@ -59,6 +59,14 @@ public class QRCodeColorManagerL2 : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            StartCoroutine(FetchColorData());
+        }
+    }
+
     IEnumerator FetchColorData()
     {
         // Ensure the UUID is generated before making a request
