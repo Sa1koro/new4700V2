@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elements:
   - ColorName: Red
-    color: {x: 0, y: 0, z: 0, w: 1}
+    color: {x: 1, y: 0, z: 0, w: 1}
     SourceAmount: 0
     selected: 0
   - ColorName: Green
@@ -22,12 +22,12 @@ MonoBehaviour:
     SourceAmount: 0
     selected: 1
   - ColorName: Grey
-    color: {x: 0, y: 0, z: 0, w: 1}
-    SourceAmount: 0
+    color: {x: 0, y: 1, z: 0, w: 1}
+    SourceAmount: 0.5
     selected: 0
   - ColorName: Yellow
-    color: {x: 0, y: 0, z: 0, w: 1}
-    SourceAmount: 0
+    color: {x: 0, y: 0, z: 1, w: 1}
+    SourceAmount: 0.5
     selected: 0
   DetectedColor:
     ColorName: 
